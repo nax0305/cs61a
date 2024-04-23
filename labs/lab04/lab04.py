@@ -159,7 +159,7 @@ def change_abstraction(change):
 
 change_abstraction.changed = False
 
-
+# waiting for solving this
 def add_chars(w1, w2):
     """
     Return a string containing the characters you need to add to w1 to get w2.
