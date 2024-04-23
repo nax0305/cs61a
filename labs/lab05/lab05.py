@@ -311,5 +311,6 @@ def copy_tree(t):
     >>> print_tree(copy)
     5
     """
+    
     return tree(label(t), [copy_tree(b) for b in branches(t)])
 
