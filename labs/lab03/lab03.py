@@ -1,160 +1,125 @@
-HW_SOURCE_FILE=__file__
+LAB_SOURCE_FILE=__file__
 
 
-def pascal(row, column):
-    """Returns a number corresponding to the value at that location
-    in Pascal's Triangle.
-    >>> pascal(0, 0)
-    1
-    >>> pascal(0, 5)	# Empty entry; outside of Pascal's Triangle
-    0
-    >>> pascal(3, 2)	# Row 4 (1 3 3 1), 3rd entry
-    3
-    """
-    "*** YOUR CODE HERE ***"
-    if(column > row):
-        return 0
-    if(row == 0 or row == column or column == 0):
-        return 1
-    return pascal(row - 1, column - 1) + pascal(row - 1, column) 
+def print_if(s, f):
+    """Print each element of s for which f returns a true value.
 
-
-def compose1(f, g):
-    """"Return a function h, such that h(x) = f(g(x))."""
-    def h(x):
-        return f(g(x))
-    return h
-
-def repeated(f, n):
-    """Return the function that computes the nth application of func (recursively!).
-
-    >>> add_three = repeated(lambda x: x + 1, 3)
-    >>> add_three(5)
-    8
-    >>> square = lambda x: x ** 2
-    >>> repeated(square, 2)(5) # square(square(5))
-    625
-    >>> repeated(square, 4)(5) # square(square(square(square(5))))
-    152587890625
-    >>> repeated(square, 0)(5)
+    >>> print_if([3, 4, 5, 6], lambda x: x > 4)
     5
+    6
+    >>> result = print_if([3, 4, 5, 6], lambda x: x % 2 == 0)
+    4
+    6
+    >>> print(result)  # print_if should return None
+    None
+    """
+    for x in s:
+        "*** YOUR CODE HERE ***"
+
+
+def close(s, k):
+    """Return how many elements of s that are within k of their index.
+
+    >>> t = [6, 2, 4, 3, 5]
+    >>> close(t, 0)  # Only 3 is equal to its index
+    1
+    >>> close(t, 1)  # 2, 3, and 5 are within 1 of their index
+    3
+    >>> close(t, 2)  # 2, 3, 4, and 5 are all within 2 of their index
+    4
+    >>> close(list(range(10)), 0)
+    10
+    """
+    count = 0
+    for i in range(len(s)):  # Use a range to loop over indices
+        "*** YOUR CODE HERE ***"
+    return count
+
+
+def close_list(s, k):
+    """Return a list of the elements of s that are within k of their index.
+
+    >>> t = [6, 2, 4, 3, 5]
+    >>> close_list(t, 0)  # Only 3 is equal to its index
+    [3]
+    >>> close_list(t, 1)  # 2, 3, and 5 are within 1 of their index
+    [2, 3, 5]
+    >>> close_list(t, 2)  # 2, 3, 4, and 5 are all within 2 of their index
+    [2, 4, 3, 5]
+    """
+    return [___ for i in range(len(s)) if ___]
+
+
+from math import sqrt
+
+def squares(s):
+    """Returns a new list containing square roots of the elements of the
+    original list that are perfect squares.
+
+    >>> seq = [8, 49, 8, 9, 2, 1, 100, 102]
+    >>> squares(seq)
+    [7, 3, 1, 10]
+    >>> seq = [500, 30]
+    >>> squares(seq)
+    []
+    """
+    return [___ for n in s if ___]
+
+
+def double_eights(n):
+    """ Returns whether or not n has two digits in row that
+    are the number 8. Assume n has at least two digits in it.
+
+    >>> double_eights(1288)
+    True
+    >>> double_eights(880)
+    True
+    >>> double_eights(538835)
+    True
+    >>> double_eights(284682)
+    False
+    >>> double_eights(588138)
+    True
+    >>> double_eights(78)
+    False
     >>> from construct_check import check
     >>> # ban iteration
-    >>> check(HW_SOURCE_FILE, 'repeated',
-    ...       ['For', 'While'])
+    >>> check(LAB_SOURCE_FILE, 'double_eights', ['While', 'For'])
     True
     """
     "*** YOUR CODE HERE ***"
-    # 1. 最简单的返回
-    # 2. 函数使用更简单的参数调用自身
-    
-    def recursiving_adder(x):
-        nonlocal f, n
-        if (n == 0):
-            return x
-        n -= 1
-        return recursiving_adder(f(x))
-        
-    return recursiving_adder
 
 
-def num_eights(x):
-    """Returns the number of times 8 appears as a digit of x.
+def make_onion(f, g):
+    """Return a function can_reach(x, y, limit) that returns
+    whether some call expression containing only f, g, and x with
+    up to limit calls will give the result y.
 
-    >>> num_eights(3)
-    0
-    >>> num_eights(8)
-    1
-    >>> num_eights(88888888)
-    8
-    >>> num_eights(2638)
-    1
-    >>> num_eights(86380)
-    2
-    >>> num_eights(12345)
-    0
-    >>> from construct_check import check
-    >>> # ban all assignment statements
-    >>> check(HW_SOURCE_FILE, 'num_eights',
-    ...       ['Assign', 'AugAssign'])
+    >>> up = lambda x: x + 1
+    >>> double = lambda y: y * 2
+    >>> can_reach = make_onion(up, double)
+    >>> can_reach(5, 25, 4)      # 25 = up(double(double(up(5))))
     True
-    """
-    "*** YOUR CODE HERE ***"
-    if (x == 0):
-        return 0
-    if (x % 10 == 8):
-        return 1 + num_eights(x // 10)
-    else:
-        return 0 + num_eights(x // 10)
-    
-
-
-def pingpong(n):
-    """Return the nth element of the ping-pong sequence.
-
-    >>> pingpong(8)
-    8
-    >>> pingpong(10)
-    6
-    >>> pingpong(15)
-    1
-    >>> pingpong(21)
-    -1
-    >>> pingpong(22)
-    -2
-    >>> pingpong(30)
-    -2
-    >>> pingpong(68)
-    0
-    >>> pingpong(69)
-    -1
-    >>> pingpong(80)
-    0
-    >>> pingpong(81)
-    1
-    >>> pingpong(82)
-    0
-    >>> pingpong(100)
-    -6
-    >>> from construct_check import check
-    >>> # ban assignment statements
-    >>> check(HW_SOURCE_FILE, 'pingpong', ['Assign', 'AugAssign'])
+    >>> can_reach(5, 25, 3)      # Not possible
+    False
+    >>> can_reach(1, 1, 0)      # 1 = 1
     True
+    >>> add_ing = lambda x: x + "ing"
+    >>> add_end = lambda y: y + "end"
+    >>> can_reach_string = make_onion(add_ing, add_end)
+    >>> can_reach_string("cry", "crying", 1)      # "crying" = add_ing("cry")
+    True
+    >>> can_reach_string("un", "unending", 3)     # "unending" = add_ing(add_end("un"))
+    True
+    >>> can_reach_string("peach", "folding", 4)   # Not possible
+    False
     """
-    "*** YOUR CODE HERE ***"
-    assert n >= 1, "please give a right ping-pong number"
-    
-    # operator, i, result = 0, 1, 0
-    # while i <= n:
-    #     if operator == 0:
-    #         result += 1
-    #     else:
-    #         result -= 1
-    #     if i % 8 == 0 or num_eights(i) > 0:
-    #         operator = 1 - operator
-    #     i += 1
-    # return result
-
-    # 如何把这一段代码改写成没有复制语句的递归？
-
-    # def circle_pp(i, operator, result):
-    #     if i == n + 1:
-    #         return result
-    #     if i % 8 == 0 or num_eights(i) > 0:
-    #         return circle_pp(i + 1, 1 - operator, result + 1)
-    #     if operator == 0:
-    #         return circle_pp(i + 1, operator, result + 1)
-    #     else:
-    #         return circle_pp(i + 1, operator, result - 1) 
-        
-    # return circle_pp(1, 0, 0)
-
-    def helper(i, state, direction):
-        if i == n:
-            return state
-        if num_eights(i) != 0 or i % 8 == 0:
-            return helper(i + 1, state - direction, direction*-1)
+    def can_reach(x, y, limit):
+        if limit < 0:
+            return ____
+        elif x == y:
+            return ____
         else:
-            return helper(i + 1, state + direction, direction)
+            return can_reach(____, ____, limit - 1) or can_reach(____, ____, limit - 1)
+    return can_reach
 
-    return helper(1, 1, 1)

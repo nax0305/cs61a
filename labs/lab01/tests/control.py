@@ -27,7 +27,8 @@ test = {
           # locked
           """,
           'hidden': False,
-          'locked': True
+          'locked': True,
+          'multiline': False
         },
         {
           'code': r"""
@@ -36,25 +37,34 @@ test = {
           ...         print('huge')
           ...     elif x > 5:
           ...         return 'big'
-          ...     elif x > 0:
-          ...         print('small')
+          ...     if x > 0:
+          ...         print('positive')
           ...     else:
-          ...         print("nothin'")
-          >>> how_big(7)
+          ...         print(0)
+          >>> how_big(7)  # Be careful with quotation marks!
           fe4028bb37030ad778842d40ac93e700
+          # locked
+          >>> print(how_big(7))  # Be careful with quotation marks!
+          7102bc8cf1223978bd8a02f3676b9cd4
           # locked
           >>> how_big(12)
           260c9a22fd4f3d2d25e08b6a0cd9d10e
+          98a026fcc10e24150ac1d08bf0cde5a9
           # locked
-          >>> how_big(1)
-          fdb47b226224360303fcfb56870d356a
+          >>> print(how_big(12))
+          260c9a22fd4f3d2d25e08b6a0cd9d10e
+          98a026fcc10e24150ac1d08bf0cde5a9
+          140b47bd322af58a8e4cce7e526bedeb
           # locked
-          >>> how_big(-1)
-          760faed592aa321d30da37c71aa1c67b
+          >>> print(how_big(1), how_big(0))
+          98a026fcc10e24150ac1d08bf0cde5a9
+          b0754f6baafe74512d1be0bd5c8098ed
+          342c92c77f6ac0d470d055412adc2e0e
           # locked
           """,
           'hidden': False,
-          'locked': True
+          'locked': True,
+          'multiline': False
         }
       ],
       'scored': False,
@@ -75,36 +85,24 @@ test = {
           # locked
           """,
           'hidden': False,
-          'locked': True
+          'locked': True,
+          'multiline': True
         },
         {
           'code': r"""
-          >>> positive = 28
-          >>> while positive: # If this loops forever, just type Infinite Loop
-          ...    print("positive?")
-          ...    positive -= 3
-          db3915202fb52c6613af5ef28bfc5773
-          # locked
-          """,
-          'hidden': False,
-          'locked': True
-        },
-        {
-          'code': r"""
-          >>> positive = -9
           >>> negative = -12
           >>> while negative: # If this loops forever, just type Infinite Loop
-          ...    if positive:
+          ...    if negative + 6:
           ...        print(negative)
-          ...    positive += 3
           ...    negative += 3
           b3c9c48be5cbc9295c81c3e75d1538d8
           efbd765b468a29852de43786a3d7f2b9
-          3c05905385c5bd4c0ab5fe2640db2eed
+          065654bed198eae1187f5223b6973a0c
           # locked
           """,
           'hidden': False,
-          'locked': True
+          'locked': True,
+          'multiline': True
         }
       ],
       'scored': False,
