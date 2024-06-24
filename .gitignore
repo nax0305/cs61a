@@ -160,3 +160,9 @@ cython_debug/
 #.idea/
 
 .vscode/
+
+# generated file after python ok
+.ok*
+
+# lecture
+lecs/
